@@ -1,4 +1,4 @@
-package countDownLatch;
+package concurrent;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -27,7 +27,7 @@ public class CountDownLatchTest {
         }  
         System.out.println("Game Start");  
         begin.countDown();
-        end.await();  
+        end.await();
         System.out.println("Game Over");  
         exec.shutdown();  
     }

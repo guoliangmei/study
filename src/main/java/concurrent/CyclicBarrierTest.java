@@ -1,4 +1,4 @@
-package countDownLatch;
+package concurrent;
 
 public class CyclicBarrierTest {
 
