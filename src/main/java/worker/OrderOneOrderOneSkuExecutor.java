@@ -1,20 +1,28 @@
 package worker;
 
-import java.util.concurrent.LinkedBlockingQueue;
+import worker.domain.Order;
 
 public class OrderOneOrderOneSkuExecutor implements Runnable{
-	
+	private OrderQueue orderQueue;
     private int num;
     
-    public OrderOneOrderOneSkuExecutor(int num){
+    public OrderOneOrderOneSkuExecutor(int num,OrderQueue orderQueue){
+    	this.orderQueue = orderQueue;
     	this.num = num;
     }
 	@Override
 	public void run() {
-		LinkedBlockingQueue queue = OrderClient.oneOrderOneSkuListQueue.get(num);
+		
 		try {
 			while(true){
-				System.out.println("OrderOneOrderOneSkuExecutor-->"+num+"---->" +  queue.take().toString());
+				// 订单处理开始
+				Order o = orderQueue.take(num);
+				Thread.sleep(5000);
+				// 处理订单
+				System.out.println("OrderOneOrderOneSkuExecutor--> queue:"+num+"----> oid:" + o.getOrderId() + "已经处理完");
+
+				// 订单处理结束
+				orderQueue.end(o);
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();

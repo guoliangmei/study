@@ -12,7 +12,8 @@ public class OrderClient {
 	private final static int oneOrderOneSku = 10;
 	private final static int oneOrderManySku = 1;
 	// 一单一品订单queue
-	public static List<LinkedBlockingQueue> oneOrderOneSkuListQueue = new ArrayList<LinkedBlockingQueue>(oneOrderOneSku);
+	public static OrderQueue oneOrderOneSkuQueue = new OrderQueue(oneOrderOneSku);
+	
 	public static ThreadPoolExecutor oneOrderOneSkuExecutor  = new ThreadPoolExecutor(
 			oneOrderOneSku,     //core
 			oneOrderOneSku, 	//max
@@ -20,7 +21,8 @@ public class OrderClient {
 			TimeUnit.SECONDS,
 			new ArrayBlockingQueue<Runnable>(10));
 	// 一单一品订单queue
-	public static List<LinkedBlockingQueue> oneOrderManySkuListQueue = new ArrayList<LinkedBlockingQueue>(oneOrderManySku);
+	public static OrderQueue oneOrderManySkuQueue = new OrderQueue(oneOrderManySku);
+	
 	public static ThreadPoolExecutor oneOrderManySkuExecutor  = new ThreadPoolExecutor(
 			oneOrderManySku,     //core
 			oneOrderManySku, 	//max
@@ -29,15 +31,12 @@ public class OrderClient {
 			new ArrayBlockingQueue<Runnable>(10));
 	 
 	static{
-
 		
 		for(int i=0;i<oneOrderOneSku;i++){
-			oneOrderOneSkuListQueue.add(new LinkedBlockingQueue());
-			oneOrderOneSkuExecutor.execute(new OrderOneOrderOneSkuExecutor(i));
+			oneOrderOneSkuExecutor.execute(new OrderOneOrderOneSkuExecutor(i,oneOrderOneSkuQueue));
 		}
 		for(int i=0;i<oneOrderManySku;i++){
-			oneOrderManySkuListQueue.add(new LinkedBlockingQueue());
-			oneOrderManySkuExecutor.execute(new OrderOneOrderManySkuExecutor(i));
+			oneOrderManySkuExecutor.execute(new OrderOneOrderManySkuExecutor(i,oneOrderManySkuQueue));
 		}
 		
 	}
