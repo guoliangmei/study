@@ -1,7 +1,5 @@
 package worker;
 
-import com.alibaba.fastjson.JSON;
-
 import worker.domain.Order;
 
 public class OrderOneOrderManySkuExecutor implements Runnable{
@@ -20,6 +18,7 @@ public class OrderOneOrderManySkuExecutor implements Runnable{
 			while(true){
 				// 订单处理开始
 				Order o = orderQueue.take(num);
+				// Thread.sleep(1000L);
 				// 处理订单
 				System.out.println("OrderOneOrderManySkuExecutor--> queue:"+num+"----> oid:" + o.getOrderId() + "已经处理完");
 				// 订单处理结束

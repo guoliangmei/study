@@ -15,11 +15,8 @@ public class Client {
 			orders.add(buildOrder(1,1001));
 			orders.add(buildOrder(2,1001,1002));
 			orders.add(buildOrder(3,1004));
-			
-			
-//			for(int i = 0;i<10;i++) {
-//				orders.add();
-//			}
+			orders.add(buildOrder(4,1002,1005));
+			orders.add(buildOrder(5,1004));
 			
 			for(Order o:orders) {
 				// 一单多品
@@ -35,8 +32,6 @@ public class Client {
 					}
 				}
 			}
-			
-	
 	}
 	
    public static Order buildOrder(long orderId,long...skuIds){

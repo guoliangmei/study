@@ -30,17 +30,15 @@ public class OrderQueue {
 	}
 	
 	public void put(int whichQ,Order o){
-
 		try {
-			oneOrderOneSkuListQueue.get(whichQ).put(o);
-            for(OrderDetail od:o.getOrderDetails()) {
+			for(OrderDetail od:o.getOrderDetails()) {
             	// SKU orderId
             	skuOrderMap.put(od.getSkuId(), od.getOrderId());
             }
+			oneOrderOneSkuListQueue.get(whichQ).put(o);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}finally {
-			
 		}
 	    
 	}
@@ -57,7 +55,7 @@ public class OrderQueue {
 			for(OrderDetail od:o.getOrderDetails()) {
 				skuOrderMap.remove(od.getSkuId(), od.getOrderId());
 			}
-			putCondition.signal();
+			putCondition.signalAll();
 		}finally {
 			putlock.unlock();
 		}
