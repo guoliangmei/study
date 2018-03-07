@@ -6,7 +6,14 @@ import java.util.concurrent.CountDownLatch;
 
 import com.jd.worker.domain.Order;
 import com.jd.worker.domain.OrderDetail;
-
+/**
+ * 
+ * jvm 调优
+ * https://www.cnblogs.com/rainy-shurun/p/5732341.html
+ * 
+ * @author meiguoliang
+ *
+ */
 public class Client {
 	private static OrderClient orderClient;
 
