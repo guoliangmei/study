@@ -10,7 +10,7 @@ import io.netty.util.ReferenceCountUtil;
 
 public class ServerHandler  extends ChannelHandlerAdapter {
 
-	@Override
+	//@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 	
 			//do something msg
