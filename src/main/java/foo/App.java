@@ -1,21 +1,39 @@
 package foo;
 
+import com.dianping.cat.Cat;
+import com.dianping.cat.message.Event;
+import com.dianping.cat.message.Transaction;
+
 import java.net.UnknownHostException;
 import java.util.Vector;
+import java.util.concurrent.Callable;
+
 /**
  * Hello world!
  *
  */
 public class App 
 {
-	// mybatis生成工具
-	// https://www.jianshu.com/p/2ec9337dc2b0
-    public static void main( String[] args ) throws UnknownHostException{
-   	Vector v=new Vector();
-    	for(int i=0;i<25;i++) v.add(new byte[1*1024*1024]);
-    	long l = 10000L;
-    	System.out.println(String.valueOf(l));
-    	
-    	
-    }
+	public static void main(String[] args) throws InterruptedException {
+
+		for(int i=0;i<10;i++){
+
+			// Transaction t = Cat.newTransaction("Task", "state");
+			Transaction t = Cat.getProducer().newTransaction("URL", "MyPage");
+			try{
+				Cat.logEvent("URL", "MyPage",Event.SUCCESS, "ip=${serverIp}");
+
+				Cat.logMetricForCount("metric.key");
+   			    Cat.logMetricForDuration("metric.key", 5);
+				// yourBusiness();
+				t.setStatus(Transaction.SUCCESS);
+			}catch (Exception e){
+				t.setStatus(e);
+				Cat.logError(e);
+			}finally {
+				t.complete();
+			}
+		}
+     //  Thread.sleep(5000000L);
+	}
 }

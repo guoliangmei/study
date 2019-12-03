@@ -1,0 +1,4 @@
+<config mode="client" xmlns:xsi="http://www.w3.org/2001/XMLSchema" xsi:noNamespaceSchemaLocation="config.xsd">
+	<domain id="cat"/>
+	<server ip="192.168.121.4" port="2280" http-port="8080" />
+</config>
