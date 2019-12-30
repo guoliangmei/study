@@ -27,11 +27,6 @@
 	    <scope>test</scope>
     </dependency>
     <dependency>
-	    <groupId>org.mybatis.generator</groupId>
-	    <artifactId>mybatis-generator-core</artifactId>
-	    <version>1.3.5</version>
-    </dependency>
-    <dependency>
 	  <groupId>com.lmax</groupId>
 	  <artifactId>disruptor</artifactId>
 	  <version>3.3.6</version>
@@ -148,9 +143,34 @@
 		  <version>5.0.4.RELEASE</version>
 	  </dependency>
 	  <!-- es 开发end-->
+
+	  <dependency>
+		  <groupId>mysql</groupId>
+		  <artifactId>mysql-connector-java</artifactId>
+		  <version>5.1.6</version>
+	  </dependency>
   </dependencies>
-  
-  
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>1.3.6</version>
+				<executions>
+					<execution>
+						<id>Generate MyBatis Artifacts</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+
+			</plugin>
+		</plugins>
+	</build>
+
+
  	<build>
 		<plugins>
 		   <plugin>
@@ -166,7 +186,7 @@
 				</dependencies>
 				<configuration>
                     <verbose>true</verbose>
-				    <configurationFile>${basedir}/src/main/resources/generatorConfig.xml</configurationFile> 
+				    <configurationFile>${basedir}/src/main/resources/generatorConfig.xml</configurationFile>
 					<overwrite>true</overwrite>
 				</configuration>
 			</plugin>
